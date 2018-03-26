@@ -1,8 +1,16 @@
-<div id="pizza" *ngFor='let pizza of pizzas'>
-  <div *ngIf="!pizza.soldOut" class="item">
-    <h1> {{pizza.name}} ({{pizza.weight}}) g </h1>
-    <h2> {{pizza.price}} RON </h2>
-    <p> {{pizza.ingredients}} </p>
-    <button *ngIf="pizza.canPurchase" id="add" name="add" class="flat"> Add to Cart </button>
+<div class="container">
+  <div id="pizza" *ngFor='let pizza of pizzas'>
+    <div class="card" *ngIf="!pizza.soldOut">
+      <div class="card-content">
+        <p class="card-title">
+          {{pizza.name}} ({{pizza.weight}}) g
+        </p>
+        <p>{{pizza.price}} RON</p>
+        <p>{{pizza.ingredients}}</p>
+      </div>
+      <div class="card-action" *ngIf="pizza.canPurchase">
+        <button id="add" name="add" class="btn"> Add to Cart</button>
+      </div>
+    </div>
   </div>
 </div>
