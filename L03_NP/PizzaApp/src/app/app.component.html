@@ -1,6 +1,9 @@
 <div class="container">
   <div id="pizza" *ngFor='let pizza of pizzas'>
     <div class="card horizontal" *ngIf="!pizza.soldOut">
+      <div class="card-image">
+        <img height="190px">
+      </div>
       <div class="card-stacked">
         <div class="card-content">
           <p class="card-title">
