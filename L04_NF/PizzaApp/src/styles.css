@@ -1,78 +1,12 @@
-button.flat {
-  border: 1px solid #808080;
-  height: 30px;
-  background: #ffffff;
+/* You can add global styles to this file, and also import other style files */
+
+.tabs {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabs .tab:hover {
   cursor: pointer;
 }
-
-button.flat:hover {
-  background: #e6e3e3;
-}
-
-button.submit {
-  background-color: #75DE79;
-}
-
-button.submit:hover {
-  background: #e6e3e3;
-}
-
-div.item {
-  padding-bottom: 10px;
-  border-bottom: 1px dotted #add8e6;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-div.item:hover {
-  border-bottom: 2px solid #add8e6;
-}
-
-div.item .content {
-  width: 30%;
-}
-
-div.item .image {
-  width: 70%;
-}
-
-div.image img {
-  width: 200px;
-}
-
-.form-control {
-  display: block;
-  width: auto;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-}
-
-textarea.form-control {
-  height: auto;
-}
-
-.right {
-  align-self: flex-end;
-}
-
-.panel {
-  min-height: 100px;
-  border: 1px solid #808080;
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-}
-
-.panel blockquote {
-  border-left: 4px solid #e6e3e3;
-  padding-left: 10px;
+.tabs .tab .active {
+  border-bottom: 4px solid;
 }

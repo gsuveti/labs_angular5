@@ -1,33 +1,12 @@
-button.flat {
-  border: 1px solid #808080;
-  height: 30px;
-  background: #ffffff;
+/* You can add global styles to this file, and also import other style files */
+
+.tabs {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabs .tab:hover {
   cursor: pointer;
 }
-
-button.flat:hover {
-  background: #e6e3e3;
-}
-
-div.item {
-  padding-bottom: 10px;
-  border-bottom: 1px dotted #add8e6;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-div.item:hover {
-  border-bottom: 2px solid #add8e6;
-}
-
-div.item .content {
-  width: 30%;
-}
-
-div.item .image {
-  width: 70%;
-}
-
-div.image img {
-  width: 200px;
+.tabs .tab .active {
+  border-bottom: 4px solid;
 }
