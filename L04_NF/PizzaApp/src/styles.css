@@ -22,6 +22,7 @@ select {
   background-size: 8px;
   background-position-y: 50%;
   background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right transparent;
+  margin-bottom: 20px;
 }
 
 .ng-valid[required]{
