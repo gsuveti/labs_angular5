@@ -1,7 +1,7 @@
 /**
  * Created by marius on 15/03/2017.
  */
-import {IPizza} from "./app.model";
+import {IPizza} from "./pizza.model";
 
 export let PIZZAS: Array<IPizza> = [
   {

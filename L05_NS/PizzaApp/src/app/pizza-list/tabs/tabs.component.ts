@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {IPizza, IReview} from "../app.model";
+import {IPizza} from "../pizza.model";
 
 @Component({
   selector: 'tabs',
