@@ -1,27 +1,134 @@
-# PizzaApp
+# Http put
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
+##Send Data to the Server
 
-## Development server
+1. addReview method in pizza rest service
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```$xslt
+addReview(pizza: IPizza, review: IReview): Observable<IPizza> {
+    const url: string = this.url + '/addReview/' + pizza._id;
+    return this.http.put<IPizza>(url, review);
+}
 
-## Code scaffolding
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. add _id field in IPizza interface(use Alt+Enter). Make it optional.
 
-## Build
+3. addReview in pizza.service.ts
+ 
+```$xslt
+addReview(pizza: IPizza, review: IReview): Observable<IPizza>;
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+4. addReview in pizza-rest.service.ts
 
-## Running unit tests
+```$xslt
+ addReview(pizza: IPizza, review: IReview): Observable<IPizza> {
+    const url: string = this.url + '/addReview/' + pizza._id;
+    return this.http.put<IPizza>(url, review);
+  }
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+and addReview in pizza-file.service.ts
 
-## Running end-to-end tests
+```$xslt
+  addReview(pizza: IPizza, review: IReview): Observable<IPizza> {
+    pizza.reviews.push(review);
+    return Observable.of(pizza);
+  }
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+##The review needs to know about the pizza now
 
-## Further help
+5. in reviews.component.ts
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```$xslt
+@Input()
+private pizza: IPizza;
+```
+and
+```$xslt
+ public onSubmit() {
+    this.newReview.createdOn = new Date().getMilliseconds();
+    this.pizzaService.addReview(this.pizza, this.newReview)
+      .subscribe(pizza => {
+        this.pizza = pizza;
+        this.newReview = {};
+      });
+
+    this.newReview = {};
+  }
+```
+
+6. reviews.component.html
+```
+<blockquote *ngFor="let review of reviews">
+
+<blockquote *ngFor="let review of pizza.reviews">
+```
+
+7. tabs.component.html
+
+change
+```$xslt
+<reviews *ngIf="isSelected(3)" [reviews]="pizza.reviews"></reviews>
+```
+to
+```
+<reviews *ngIf="isSelected(3)" [pizza]="pizza"></reviews>
+```
+
+##Events – the solution for coupling
+
+8. reviews.component.ts
+```$xslt
+  @Input()
+  private reviews: Array<IReview>;
+```
+```$xslt
+@Output()
+  private addReview = new EventEmitter<Review>();
+
+```
+```$xslt
+ public onSubmit() {
+    this.newReview.createdOn = new Date().getMilliseconds();
+    this.addReview.emit(this.newReview);
+    this.newReview = {};
+  }
+
+```
+
+9. reviews.component.html
+
+change
+```
+<blockquote *ngFor="let review of pizza.reviews">
+```
+to
+```
+<blockquote *ngFor="let review of reviews">
+```
+
+10. tabs.component.ts
+```$xslt
+
+  public addReview(review: IReview) {
+    this.pizzaService.addReview(this.pizza, review)
+      .subscribe(pizza => this.pizza = pizza);
+  }
+```
+
+11. tabs.component.html
+
+change
+```$xslt
+<reviews *ngIf="isSelected(3)" [pizza]="pizza"></reviews>
+```
+to 
+```
+<reviews *ngIf="isSelected(3)" 
+         [reviews]="pizza.reviews" 
+         (addReview)="addReview($event)">
+</reviews>
+```
