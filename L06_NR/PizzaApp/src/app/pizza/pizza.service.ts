@@ -4,6 +4,8 @@ import {Observable} from "rxjs/Observable";
 
 
 export interface IPizzaService {
+  getPizza(id:string): Observable<IPizza>;
+
   getPizzas(): Observable<Array<IPizza>>;
 
   addReview(pizza: IPizza, review: IReview): Observable<IPizza>;
