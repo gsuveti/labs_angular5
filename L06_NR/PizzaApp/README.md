@@ -12,7 +12,7 @@ addReview(pizza: IPizza, review: IReview): Observable<IPizza> {
 
 ```
 
-2. add _id field in IPizza interface(use Alt+Enter). Make it optional
+2. add _id field in IPizza interface(use Alt+Enter). Make it optional.
 
 3. addReview in pizza.service.ts
  
@@ -29,7 +29,7 @@ addReview(pizza: IPizza, review: IReview): Observable<IPizza>;
   }
 ```
 
-5.addReview in pizza-file.service.ts
+and addReview in pizza-file.service.ts
 
 ```$xslt
   addReview(pizza: IPizza, review: IReview): Observable<IPizza> {
@@ -40,7 +40,7 @@ addReview(pizza: IPizza, review: IReview): Observable<IPizza>;
 
 ##The review needs to know about the pizza now
 
-6. in reviews.component.ts
+5. in reviews.component.ts
 
 ```$xslt
 @Input()
@@ -59,9 +59,76 @@ and
     this.newReview = {};
   }
 ```
-7. reviews.component.html
+
+6. reviews.component.html
 ```
 <blockquote *ngFor="let review of reviews">
 
 <blockquote *ngFor="let review of pizza.reviews">
+```
+
+7. tabs.component.html
+
+change
+```$xslt
+<reviews *ngIf="isSelected(3)" [reviews]="pizza.reviews"></reviews>
+```
+to
+```
+<reviews *ngIf="isSelected(3)" [pizza]="pizza"></reviews>
+```
+
+##Events – the solution for coupling
+
+8. reviews.component.ts
+```$xslt
+  @Input()
+  private reviews: Array<IReview>;
+```
+```$xslt
+@Output()
+  private addReview = new EventEmitter<Review>();
+
+```
+```$xslt
+ public onSubmit() {
+    this.newReview.createdOn = new Date().getMilliseconds();
+    this.addReview.emit(this.newReview);
+    this.newReview = {};
+  }
+
+```
+
+9. reviews.component.html
+
+change
+```
+<blockquote *ngFor="let review of pizza.reviews">
+```
+to
+```
+<blockquote *ngFor="let review of reviews">
+```
+
+10. tabs.component.ts
+```$xslt
+
+  public addReview(review: IReview) {
+    this.pizzaService.addReview(this.pizza, review)
+      .subscribe(pizza => this.pizza = pizza);
+  }
+```
+
+11. tabs.component.html
+
+change
+```$xslt
+<reviews *ngIf="isSelected(3)" [pizza]="pizza"></reviews>
+```
+to 
+```
+<reviews *ngIf="isSelected(3)" 
+         [reviews]="pizza.reviews" 
+         (addReview)="addReview($event)">
+</reviews>
 ```
