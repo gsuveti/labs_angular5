@@ -9,7 +9,7 @@ import {IngredientsComponent} from './pizza-details/tabs/ingredients/ingredients
 import {ExtrasComponent} from './pizza-details/tabs/extras/extras.component';
 import {PizzaDetailsComponent} from './pizza-details/pizza-details.component';
 import {FormsModule} from '@angular/forms';
-import {PizzaServiceProvider} from "./pizza-rest.service";
+import {PizzaServiceProvider} from './pizza-rest.service';
 
 @NgModule({
   imports: [
