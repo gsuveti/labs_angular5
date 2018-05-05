@@ -18,7 +18,7 @@ import {CustomerDetailsComponent} from './customer/customer-details/customer-det
 import {CustomerServiceProvider} from './customer/customer.service';
 
 
-const PIZZA_ROUTES = [
+const ROUTES = [
   {path: '', redirectTo: '/pizzas', pathMatch: 'full'},
   {
     path: 'pizzas',
@@ -49,7 +49,7 @@ const PIZZA_ROUTES = [
     CustomerDetailsComponent
   ],
   imports: [
-    RouterModule.forRoot(PIZZA_ROUTES),
+    RouterModule.forRoot(ROUTES),
     BrowserModule,
     FormsModule,
     HttpClientModule,
