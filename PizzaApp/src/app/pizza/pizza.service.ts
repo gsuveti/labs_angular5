@@ -1,10 +1,10 @@
 import {IPizza, IReview} from './pizza.model';
 import {InjectionToken} from '@angular/core';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 
 export interface IPizzaService {
-  getPizza(id:string): Observable<IPizza>;
+  getPizza(id: string): Observable<IPizza>;
 
   getPizzas(): Observable<Array<IPizza>>;
 

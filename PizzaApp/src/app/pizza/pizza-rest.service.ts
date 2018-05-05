@@ -1,18 +1,18 @@
 import {Injectable, Provider} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {IPizza, IReview} from "./pizza.model";
-import {Observable} from "rxjs/Observable";
-import {IPizzaService, PIZZA_SERVICE} from "./pizza.service";
+import {HttpClient} from '@angular/common/http';
+import {IPizza, IReview} from './pizza.model';
+import {Observable} from 'rxjs/Observable';
+import {IPizzaService, PIZZA_SERVICE} from './pizza.service';
 
 @Injectable()
 export class PizzaRestService implements IPizzaService {
 
-  private url: string = "http://pizza-store.herokuapp.com/api/pizzas";
+  private url = 'http://pizza-store.herokuapp.com/api/pizzas';
 
   constructor(private http: HttpClient) {
   }
 
-  getPizza(id:string): Observable<IPizza> {
+  getPizza(id: string): Observable<IPizza> {
     return this.http.get<IPizza>(`${this.url}/${id}`);
   }
 

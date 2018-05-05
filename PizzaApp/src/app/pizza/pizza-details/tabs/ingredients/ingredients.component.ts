@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class IngredientsComponent implements OnInit {
   @Input()
-  private ingredients:string;
+  private ingredients: string;
 
   constructor() { }
 

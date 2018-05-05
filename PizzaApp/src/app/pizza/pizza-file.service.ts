@@ -1,9 +1,9 @@
 import {Injectable, Provider} from '@angular/core';
-import {PIZZAS} from "./pizza.data";
-import {IPizza, IReview} from "./pizza.model";
-import {IPizzaService, PIZZA_SERVICE} from "./pizza.service";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/of";
+import {PIZZAS} from './pizza.data';
+import {IPizza, IReview} from './pizza.model';
+import {IPizzaService, PIZZA_SERVICE} from './pizza.service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class PizzaFileService implements IPizzaService {
