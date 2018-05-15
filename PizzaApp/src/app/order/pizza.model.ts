@@ -4,5 +4,5 @@
 export interface IPizza {
   _id?: string;
   name: string;
-  price: string;
+  price: number;
 }
