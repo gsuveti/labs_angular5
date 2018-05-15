@@ -43,7 +43,7 @@ export class OrderListComponent implements OnInit {
       return pizzas.map(pizza => {
         return {
           pizza,
-          quantity: 1
+          quantity: 0
         };
       });
     });
