@@ -5,6 +5,7 @@ import {IPizza} from './pizza.model';
 import {HttpClient} from '@angular/common/http';
 import {CUSTOMERS} from '../customer/customer.data';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 export interface IOrderService {
   getPizzas(): Observable<Array<IPizza>>;
@@ -31,10 +32,19 @@ export class OrderRestService {
   }
 
   getCustomer(id: string): Observable<ICustomer> {
-    return Observable.create(observer => {
-      observer.next(CUSTOMERS.find(customer => customer._id === id));
-      observer.complete();
-    });
+    if (id) {
+      return Observable.create(observer => {
+        observer.next(CUSTOMERS.find(customer => customer._id === id));
+        observer.complete();
+      });
+    } else {
+      return Observable.of({
+        name: '',
+        phone: '',
+        email: '',
+        address: ''
+      });
+    }
   }
 }
 
