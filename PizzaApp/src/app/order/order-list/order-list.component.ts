@@ -81,8 +81,5 @@ export class OrderListComponent implements OnInit {
 
   onSubmit() {
     console.log(this.orderForm);
-    this.orderService.saveOrder(this.orderForm.value).subscribe(pizza => {
-      console.log(pizza);
-    });
   }
 }

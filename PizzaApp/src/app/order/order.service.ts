@@ -2,10 +2,11 @@ import {Injectable, InjectionToken, Provider} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ICustomer} from './customer.model';
 import {IPizza} from './pizza.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import {IOrder} from './order.model';
+import {CUSTOMERS} from '../customer/customer.data';
 
 export interface IOrderService {
   getPizzas(): Observable<Array<IPizza>>;
@@ -18,9 +19,7 @@ export interface IOrderService {
 @Injectable()
 export class OrderRestService implements IOrderService {
 
-  private pizzaUrl = 'http://localhost:8080/rest/pizzas';
-  private customerUrl = 'http://localhost:8080/rest/customers';
-  private orderUrl = 'http://localhost:8080/rest/orders';
+  private pizzaUrl = 'http://pizza-store.herokuapp.com/api/pizzas';
 
   constructor(private http: HttpClient) {
   }
@@ -35,7 +34,10 @@ export class OrderRestService implements IOrderService {
 
   getCustomer(id: string): Observable<ICustomer> {
     if (id) {
-      return this.http.get<ICustomer>(`${this.customerUrl}/${id}`);
+      return Observable.create(observer => {
+        observer.next(CUSTOMERS.find(customer => customer._id === id));
+        observer.complete();
+      });
     } else {
       return Observable.of({
         name: '',
@@ -44,18 +46,9 @@ export class OrderRestService implements IOrderService {
         address: ''
       });
     }
-
-
   }
 
-
   saveOrder(order: IOrder) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.post(this.orderUrl, order, httpOptions);
   }
 }
 
